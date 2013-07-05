@@ -1,0 +1,2 @@
+Pokercoin (POK)
+
