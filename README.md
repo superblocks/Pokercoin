@@ -1,8 +1,8 @@
 Pokercoin Reboot
-
-Symbol: POK
+================
 
 Specs:
+*  Symbol: POK
 *  22 Million Coins Total
 *  Block time: 60 seconds
 *  Difficulty starts at .00032432
@@ -21,4 +21,6 @@ Block Rewards:
 Premine: 
 *  100000 Coins on block 2
 
+Block Explorers:
+* http://altcha.in/chain/Pokercoin
 
