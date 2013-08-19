@@ -10,6 +10,10 @@ Specs:
 *  Matures: 20 Blocks.
 *  Re-targets every 60 blocks or 1 hour.
 *  Block Rewards Half Yearly
+*  PUBKEY_ADDRESS = 171
+*  SCRIPT_ADDRESS = 5
+*  PUBKEY_ADDRESS_TEST = 111
+*  SCRIPT_ADDRESS_TEST = 196
 
 Block Rewards:
 *  0-200    - 10 Coins
