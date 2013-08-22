@@ -27,6 +27,9 @@ namespace Checkpoints
             ( 0, uint256("0x5b08cbe328392be8151f5deec2dc92e7609dcbd20e0dac335904ccf538df68e8")) // Genesis Block
             ( 2, uint256("0x25467f804155a90e5578e3d2bfc3341389bb79cbf7292f74b109c47fcf86797d")) // Premine
             ( 777, uint256("0x07e188e6f2f4397a873f8c1e9a6903eba7457c44f5c957c1b006aa568ab39513")) 
+            // Block 2913 contains the transaction that DESTROYED the 100,000 POK Premine from Block 2.
+            // The entire premine was sent to the destroyer address: 2BuCidDstqL7xDforAjhFxcuStL1V5jzVRa
+            ( 2913, uint256("0x702fb5ca8bd664e61fe2d39a99c6a4730d48cfa29cb3e8d4bda2f9612ca925b6"))
             ;
 
     bool CheckBlock(int nHeight, const uint256& hash)
