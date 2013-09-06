@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 The Litecoin Developers
 // Copyright (c) 2013 adam m.
+// Copyright (c) 2013 The Pokercoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -398,6 +399,63 @@ Value gethashespersec(const Array& params, bool fHelp)
 }
 
 
+
+//
+// Get a Playing Card - version 0.0.1
+//
+std::string getcard( char c )
+{
+    switch( std::tolower(c) ) {
+        case '1': return "Ace";
+        case '2': return "2";
+        case '3': return "3";
+        case '4': return "4";
+        case '5': return "5";
+        case '6': return "6";
+        case '7': return "7";
+        case '8': return "8";
+        case '9': return "9";
+        case 'a': return "10";
+        case 'b': return "Jack";
+        case 'c': return "Queen";
+        case 'd': return "King";
+        default: case 'e': case 'f': case '0': return "Joker";
+    }
+}
+
+//
+// Get the Suit of a Playing Card - version 0.0.1
+//
+std::string getsuit( char c )
+{
+    switch( std::tolower(c) ) {
+        default: return "ERROR";
+        case '0': case '1': case '2': case '3': return "Clubs";
+        case '4': case '5': case '6': case '7': return "Diamonds";
+        case '8': case '9': case 'a': case 'b': return "Hearts";
+        case 'c': case 'd': case 'e': case 'f': return "Spades";
+    }
+}
+
+
+//
+// Get a Hand of Playing Cards - RPC call - version 0.0.1
+//
+Value getcards(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 1)
+        throw runtime_error(
+            "getcards <hash>\n"
+            "Returns a hand of playing cards.");
+
+    std::string strHash = params[0].get_str();
+
+    return GetCards(strHash);
+}
+
+
+
+
 Value getinfo(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
@@ -414,6 +472,7 @@ Value getinfo(const Array& params, bool fHelp)
     obj.push_back(Pair("walletversion", pwalletMain->GetVersion()));
     obj.push_back(Pair("balance",       ValueFromAmount(pwalletMain->GetBalance())));
     obj.push_back(Pair("blocks",        (int)nBestHeight));
+    obj.push_back(Pair("cards",         GetCards(hashBestChain.ToString().c_str())));
     obj.push_back(Pair("connections",   (int)vNodes.size()));
     obj.push_back(Pair("proxy",         (addrProxy.IsValid() ? addrProxy.ToStringIPPort() : string())));
     obj.push_back(Pair("difficulty",    (double)GetDifficulty()));
@@ -2331,6 +2390,7 @@ static const CRPCCommand vRPCCommands[] =
     { "getgenerate",            &getgenerate,            true },
     { "setgenerate",            &setgenerate,            true },
     { "gethashespersec",        &gethashespersec,        true },
+    { "getcards",               &getcards,               true },    
     { "getinfo",                &getinfo,                true },
     { "getmininginfo",          &getmininginfo,          true },
     { "getnewaddress",          &getnewaddress,          true },
