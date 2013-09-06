@@ -437,6 +437,28 @@ std::string getsuit( char c )
     }
 }
 
+//
+// Get a Hand of Playing Cards - version 0.0.1
+//
+std::string GetCards( std::string hash, int limit = 5 )
+{
+    if( hash.length() != 64 ) { return "ERROR: hash is not 64 chars long"; }
+    std::string deck, check;
+    int count = 0;
+    for (int i = 0; i < hash.length(); i+=2) {
+        check = hash.substr(i,2);
+        if( check[0] == '0' || check[0] == 'e' || check[0] == 'f' )
+            continue;
+        deck.append( getcard(check[0]) ).append( " of " ).append( getsuit(check[1]) ).append( ", " );
+        count++;
+        if( count == limit )
+            break;
+    }
+    if( count != limit )
+        deck.append( "ERROR: not enough valid cards in the deck" );
+    return deck;
+}
+
 
 //
 // Get a Hand of Playing Cards - RPC call - version 0.0.1
